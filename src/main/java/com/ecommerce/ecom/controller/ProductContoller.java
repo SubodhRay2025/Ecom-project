@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductContoller {
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public Product getProductById(@PathVariable("id") Long id){
         return new Product();
     }
