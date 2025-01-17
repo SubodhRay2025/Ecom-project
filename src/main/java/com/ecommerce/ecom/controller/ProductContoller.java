@@ -5,10 +5,7 @@ import com.ecommerce.ecom.modal.Category;
 import com.ecommerce.ecom.modal.Product;
 import com.ecommerce.ecom.services.FakeProductStoreServices;
 import com.ecommerce.ecom.services.ProductServices;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,4 +28,12 @@ public class ProductContoller {
     public List<Product>getAllProducts(){
         return productServices.getAllProducts();
     }
+
+    @PutMapping("{/id}")
+    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product){
+         productServices.updateProduct(id,product);
+        return product;
+    }
+
+
 }
