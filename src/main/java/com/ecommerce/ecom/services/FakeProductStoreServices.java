@@ -3,7 +3,10 @@ package com.ecommerce.ecom.services;
 import com.ecommerce.ecom.dtos.FakeStoreProductsDtos;
 import com.ecommerce.ecom.modal.Category;
 import com.ecommerce.ecom.modal.Product;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpMessageConverterExtractor;
+import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -36,8 +39,17 @@ public class FakeProductStoreServices implements ProductServices {
         return products;
     }
     @Override
-    public void updateProduct(Long productId, Product product) {
-
+    public Product updateProduct(Long productId, Product product) {
+      //patch
+        RequestCallback requestCallback= restTemplate.httpEntityCallback(product, FakeStoreProductsDtos.class);
+        HttpMessageConverterExtractor<FakeStoreProductsDtos> responseExtractor = new HttpMessageConverterExtractor(FakeStoreProductsDtos.class,restTemplate.getMessageConverters());
+        FakeStoreProductsDtos fakeStoreProductsDtos= restTemplate.execute("https://fakestoreapi.com/products/"+productId,
+                HttpMethod.PATCH,
+                requestCallback,
+                responseExtractor
+        );
+       // FakeStoreProductsDtos fakeStoreProductsDtos= restTemplate.patchForObject("https://fakestoreapi.com/products/"+productId, product,FakeStoreProductsDtos.class );
+       return convertFakeStoreProductDtoToProduct(fakeStoreProductsDtos);
     }
 
     private Product convertFakeStoreProductDtoToProduct(FakeStoreProductsDtos fakeStoreProductsDtos){

@@ -8,5 +8,5 @@ public interface ProductServices {
 
     Product getSingleProduct(Long id);
     List<Product> getAllProducts();
-    void updateProduct(Long id, Product product);
+    Product updateProduct(Long id, Product product);
 }
