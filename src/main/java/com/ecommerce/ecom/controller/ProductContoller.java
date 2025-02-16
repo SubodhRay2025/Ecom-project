@@ -29,7 +29,7 @@ public class  ProductContoller {
         return productServices.getAllProducts();
     }
 
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
     public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product){
          productServices.updateProduct(id,product);
         return product;
