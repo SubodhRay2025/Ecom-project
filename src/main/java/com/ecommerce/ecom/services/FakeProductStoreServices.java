@@ -44,7 +44,7 @@ public class FakeProductStoreServices implements ProductServices {
         RequestCallback requestCallback= restTemplate.httpEntityCallback(product, FakeStoreProductsDtos.class);
         HttpMessageConverterExtractor<FakeStoreProductsDtos> responseExtractor = new HttpMessageConverterExtractor(FakeStoreProductsDtos.class,restTemplate.getMessageConverters());
         FakeStoreProductsDtos fakeStoreProductsDtos= restTemplate.execute("https://fakestoreapi.com/products/"+productId,
-                HttpMethod.PATCH,
+                HttpMethod.PUT,
                 requestCallback,
                 responseExtractor
         );

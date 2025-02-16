@@ -31,8 +31,8 @@ public class  ProductContoller {
 
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product){
-         productServices.updateProduct(id,product);
-        return product;
+        return productServices.updateProduct(id,product);
+
     }
 
 
